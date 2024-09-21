@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { getUserFromDb } from "./app/api/auth/getUserFromDb";
+import { findUser } from "./app/api/auth/findUser";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
@@ -16,16 +16,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         let user = null;
-
         // logic to verify if the user exists
-        user = await getUserFromDb(credentials);
-
+        user = await findUser(credentials);
         if (!user) {
           // No user found, so this is their first attempt to login
           // meaning this is also the place you could do registration
           throw new Error("User not found.");
         }
-
         // return user object with their profile data
         return user;
       },

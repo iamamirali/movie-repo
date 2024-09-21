@@ -1,4 +1,5 @@
 declare global {
-  var mongoose: any;
+  var prisma: PrismaClient | undefined;
 }
+
 export {};
