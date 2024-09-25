@@ -2,12 +2,13 @@
 // import Link from "next/link";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { Header } from "./components";
 
 export default async function Home() {
   const session = await auth();
   if (!session?.user) redirect("/login");
 
-  return <h2>hello</h2>;
+  return <Header />;
   // redirect("/login");
   // return (
   //   <main className="flex min-h-screen flex-col items-center justify-between p-24">
