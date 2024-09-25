@@ -6,7 +6,7 @@ import { FaUserCircle } from "react-icons/fa";
 
 export const Header = (): JSX.Element => {
   return (
-    <header className="h-12 p-4 bg-neutral-900 w-full flex items-center justify-between">
+    <header className="h-12 p-4 bg-neutral-900 w-full flex items-center justify-between fixed top-0">
       <Link className="flex" href="/">
         <RiMovie2Line className="text-yellow-400 text-2xl" />
         <span className="text-base font-bold">MovieRepo</span>
