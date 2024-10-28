@@ -1,13 +1,22 @@
 // import Image from "next/image";
 // import Link from "next/link";
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
+import { Header } from './components';
+import { MoviesList } from './MoviesList';
 
 export default async function Home() {
   const session = await auth();
-  if (!session?.user) redirect("/login");
+  if (!session?.user) redirect('/login');
 
-  return <h2>hello</h2>;
+  return (
+    <div className="flex flex-col w-full">
+      <Header />
+      <main className="flex flex-col flex-grow pb-5 pt-16 px-4">
+        <MoviesList />
+      </main>
+    </div>
+  );
   // redirect("/login");
   // return (
   //   <main className="flex min-h-screen flex-col items-center justify-between p-24">
