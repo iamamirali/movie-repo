@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { RiMovie2Line } from "react-icons/ri";
-import { IconButton } from "../button";
-import { FiSearch } from "react-icons/fi";
-import { FaUserCircle } from "react-icons/fa";
+import Link from 'next/link';
+import { RiMovie2Line } from 'react-icons/ri';
+import { IconButton } from '../button';
+import { FiSearch } from 'react-icons/fi';
+import { FaUserCircle } from 'react-icons/fa';
 
 export const Header = (): JSX.Element => {
   return (

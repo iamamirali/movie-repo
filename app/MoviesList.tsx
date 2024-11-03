@@ -1,12 +1,23 @@
+'use client';
+
 import { FaFilter, FaSort } from 'react-icons/fa';
-import { Button, MovieCard } from './components';
+import { Button, Modal, MovieCard } from './components';
 import { FaPlus } from 'react-icons/fa6';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import { FiVideoOff } from 'react-icons/fi';
-import { prisma } from '@/lib/db';
+import { TGetMoviesResponse } from '@/types/movie';
+import { useState } from 'react';
 
-export const MoviesList = async () => {
-  const movies = await prisma.movie?.findMany();
+type TProps = { movies: TGetMoviesResponse };
+
+export const MoviesList = (props: TProps) => {
+  const { movies } = props;
+
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  const onAddModalClose = () => setShowAddModal(false);
+
+  const onAddButtonClick = () => setShowAddModal(true);
 
   return (
     <div className="flex flex-col flex-grow">
@@ -28,6 +39,7 @@ export const MoviesList = async () => {
           title="Add"
           Icon={FaPlus}
           className="text-neutral-700 bg-yellow-400"
+          onClick={onAddButtonClick}
         />
       </div>
 
@@ -36,6 +48,17 @@ export const MoviesList = async () => {
           <MovieCard key={id} {...{ name, genre, rating, year, image }} />
         ))}
       </div>
+
+      {showAddModal && (
+        <Modal
+          title="Add Movie"
+          subtitle="Enter details of your movie"
+          onClose={onAddModalClose}
+          className="lg:w-[60%] lg:min-w-[42rem] lg:min-h-80 lg:h-[50%] xl:h-[70%]"
+        >
+          <h3>modal</h3>
+        </Modal>
+      )}
 
       {/* <div className="py-6 flex items-center flex-grow">
         <button className="w-full h-1/2 flex flex-col items-center justify-center border border-dashed rounded-xl transition-all hover:brightness-[.85] active:brightness-75 border-neutral-50">

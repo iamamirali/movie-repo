@@ -4,16 +4,21 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import { Header } from './components';
 import { MoviesList } from './MoviesList';
+import { prisma } from '@/lib/db';
+import { TGetMoviesResponse } from '@/types/movie';
 
 export default async function Home() {
   const session = await auth();
   if (!session?.user) redirect('/login');
 
+  // const movies: TGetMoviesResponse = await prisma.movie?.findMany();
+  const movies: TGetMoviesResponse = [];
+
   return (
     <div className="flex flex-col w-full">
       <Header />
       <main className="flex flex-col flex-grow pb-5 pt-16 px-4">
-        <MoviesList />
+        <MoviesList movies={movies} />
       </main>
     </div>
   );
