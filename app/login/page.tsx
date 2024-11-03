@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { signInUser } from "../actions/auth";
+import Image from 'next/image';
+import Link from 'next/link';
+import { signInUser } from '../actions/auth';
+import { Button, Input } from '../components';
 
 export default function Login(): JSX.Element {
   return (
@@ -22,38 +23,17 @@ export default function Login(): JSX.Element {
           </h2>
         </div>
         <div>
-          <label htmlFor="username" className="text-sm">
-            Username
-            <br />
-            <input
-              name="username"
-              id="username"
-              type="text"
-              placeholder="test"
-              className="text-base mt-3 mb-6 w-full h-12 rounded-xl p-3 text-neutral-0 bg-neutral-400 focus:outline-none border-solid border border-neutral-400 transition hover:border-neutral-50 focus:border-yellow-400 placeholder:text-neutral-100"
-            />
-          </label>
-          <label htmlFor="password" className="text-sm">
-            Password
-            <br />
-            <input
-              name="password"
-              id="password"
-              type="password"
-              placeholder="test"
-              className="text-base mt-3 w-full h-12 rounded-xl p-3 text-neutral-0 bg-neutral-400 focus:outline-none border-solid border border-neutral-400 transition hover:border-neutral-50 focus:border-yellow-400 placeholder:text-neutral-100"
-            />
-          </label>
+          <Input label="Username" name="username" className="mb-6" />
+          <Input label="Password" name="password" />
         </div>
-        <button
+        <Button
+          title="Sign In"
           type="submit"
-          className="rounded-xl h-12 p-3 text-base text-neutral-900 font-semibold w-full bg-yellow-400 transition hover:bg-yellow-200 active:bg-yellow-50"
-        >
-          Sign In
-        </button>
+          className="rounded-xl !h-12 !p-3 !text-base text-neutral-900 w-full bg-yellow-400 hover:bg-yellow-200 active:bg-yellow-50"
+        />
       </form>
       <div className="text-sm">
-        Don`t have an account?{" "}
+        Don`t have an account?{' '}
         <Link
           href="/"
           className="text-yellow-400 transition hover:text-yellow-200 active:text-yellow-50"

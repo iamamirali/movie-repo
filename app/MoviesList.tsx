@@ -1,7 +1,7 @@
 'use client';
 
 import { FaFilter, FaSort } from 'react-icons/fa';
-import { Button, Modal, MovieCard } from './components';
+import { Button, Input, Modal, MovieCard } from './components';
 import { FaPlus } from 'react-icons/fa6';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import { FiVideoOff } from 'react-icons/fi';
@@ -13,7 +13,7 @@ type TProps = { movies: TGetMoviesResponse };
 export const MoviesList = (props: TProps) => {
   const { movies } = props;
 
-  const [showAddModal, setShowAddModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(true);
 
   const onAddModalClose = () => setShowAddModal(false);
 
@@ -54,9 +54,31 @@ export const MoviesList = (props: TProps) => {
           title="Add Movie"
           subtitle="Enter details of your movie"
           onClose={onAddModalClose}
-          className="lg:w-[60%] lg:min-w-[42rem] lg:min-h-80 lg:h-[50%] xl:h-[70%]"
+          className="lg:w-[60%] lg:min-w-[42rem] flex flex-col"
         >
-          <h3>modal</h3>
+          <form className="flex flex-col overflow-auto">
+            <div className="flex flex-col gap-4 overflow-auto">
+              <Input label="Name" name="name" />
+              <div className="flex gap-4 w-full">
+                <Input label="Year" name="year" type="number" />
+                <Input label="Rating" name="rating" type="number" />
+              </div>
+            </div>
+
+            <div className="flex gap-4 mt-9">
+              <Button
+                title="Cancel"
+                type="button"
+                onClick={onAddModalClose}
+                className="border border-neutral-50 text-neutral-50 w-2/5 !h-12 !text-base !rounded-xl"
+              />
+              <Button
+                title="Add Movie"
+                type="submit"
+                className="bg-yellow-400 !h-12 text-neutral-700 w-3/5 !text-base !rounded-xl"
+              />
+            </div>
+          </form>
         </Modal>
       )}
 

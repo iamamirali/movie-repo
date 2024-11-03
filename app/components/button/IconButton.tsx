@@ -11,7 +11,10 @@ export const IconButton = (props: TProps): JSX.Element => {
   const { Icon, onClick, className } = props;
 
   return (
-    <button onClick={onClick} className={className ?? ''}>
+    <button
+      onClick={onClick}
+      className={`transition hover:brightness-75 active:brightness-50 ${className}`}
+    >
       <Icon className="text-2xl" />
     </button>
   );
