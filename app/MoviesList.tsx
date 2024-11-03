@@ -56,8 +56,9 @@ export const MoviesList = (props: TProps) => {
           onClose={onAddModalClose}
           className="lg:w-[60%] lg:min-w-[42rem] flex flex-col"
         >
-          <form className="flex flex-col overflow-auto">
+          <form className="flex flex-col overflow-auto pb-20">
             <div className="flex flex-col gap-4 overflow-auto">
+              <Input label="Name" name="name" />
               <Input label="Name" name="name" />
               <div className="flex gap-4 w-full">
                 <Input label="Year" name="year" type="number" />
@@ -65,7 +66,7 @@ export const MoviesList = (props: TProps) => {
               </div>
             </div>
 
-            <div className="flex gap-4 mt-9">
+            <div className="flex gap-4 absolute bottom-6 w-full left-0 right-0 px-6">
               <Button
                 title="Cancel"
                 type="button"
