@@ -105,7 +105,7 @@ export const Select = (props: TProps) => {
               <div className="bg-neutral-900 opacity-70 fixed w-full h-full z-10" />
               <ul className="absolute bottom-0 bg-neutral-700 z-20 rounded-t-2xl w-full px-2 py-4 flex flex-col max-h-[60%]">
                 <div className="flex items-start justify-between px-2">
-                  <h3 className="text-neutral-0 text-lg font-semibold mb-3">
+                  <h3 className="text-neutral-0 text-xl font-semibold mb-3">
                     Select {label}
                   </h3>
                   <IconButton
@@ -123,7 +123,7 @@ export const Select = (props: TProps) => {
                     return (
                       <li
                         key={optionValue}
-                        className="text-neutral-0 transition text-sm rounded-lg bg-neutral-700 hover:brightness-[0.85] active:brightness-75"
+                        className="text-neutral-0 transition text-base rounded-lg bg-neutral-700 hover:brightness-[0.85] active:brightness-75"
                       >
                         <Checkbox
                           label={optionLabel}
