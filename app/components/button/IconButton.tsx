@@ -13,7 +13,9 @@ export const IconButton = (props: TProps): JSX.Element => {
   return (
     <button
       onClick={onClick}
-      className={`transition hover:brightness-75 active:brightness-50 ${className}`}
+      className={`transition hover:brightness-75 active:brightness-50 ${
+        className ?? ''
+      }`}
     >
       <Icon className="text-2xl" />
     </button>

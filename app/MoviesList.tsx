@@ -1,7 +1,7 @@
 'use client';
 
 import { FaFilter, FaSort } from 'react-icons/fa';
-import { Button, Input, Modal, MovieCard } from './components';
+import { Button, Input, Modal, MovieCard, Select } from './components';
 import { FaPlus } from 'react-icons/fa6';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import { FiVideoOff } from 'react-icons/fi';
@@ -9,6 +9,8 @@ import { TGetMoviesResponse } from '@/types/movie';
 import { useState } from 'react';
 
 type TProps = { movies: TGetMoviesResponse };
+
+const genreOptions = ['action', 'drama', 'comedy', 'sci-fi'];
 
 export const MoviesList = (props: TProps) => {
   const { movies } = props;
@@ -59,24 +61,24 @@ export const MoviesList = (props: TProps) => {
           <form className="flex flex-col overflow-auto pb-20">
             <div className="flex flex-col gap-4 overflow-auto">
               <Input label="Name" name="name" />
-              <Input label="Name" name="name" />
+              <Select name="genre" label="Genre" options={genreOptions} />
               <div className="flex gap-4 w-full">
                 <Input label="Year" name="year" type="number" />
                 <Input label="Rating" name="rating" type="number" />
               </div>
             </div>
 
-            <div className="flex gap-4 absolute bottom-6 w-full left-0 right-0 px-6">
+            <div className="flex justify-end gap-4 text-right absolute bottom-6 z-0 w-full left-0 right-0 px-6">
               <Button
                 title="Cancel"
                 type="button"
                 onClick={onAddModalClose}
-                className="border border-neutral-50 text-neutral-50 w-2/5 !h-12 !text-base !rounded-xl"
+                className="border border-neutral-50 text-neutral-50 !w-2/5 md:!w-32 !h-12 !text-base !rounded-xl"
               />
               <Button
                 title="Add Movie"
                 type="submit"
-                className="bg-yellow-400 !h-12 text-neutral-700 w-3/5 !text-base !rounded-xl"
+                className="bg-yellow-400 !h-12 text-neutral-700 !w-3/5 md:!w-48 !text-base !rounded-xl"
               />
             </div>
           </form>
