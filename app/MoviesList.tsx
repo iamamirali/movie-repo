@@ -1,7 +1,7 @@
 'use client';
 
 import { FaFilter, FaSort } from 'react-icons/fa';
-import { Button, Input, Modal, MovieCard, Select } from './components';
+import { Button, Input, Modal, MovieCard, Select, Upload } from './components';
 import { FaPlus } from 'react-icons/fa6';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import { FiVideoOff } from 'react-icons/fi';
@@ -62,10 +62,11 @@ export const MoviesList = (props: TProps) => {
             <div className="flex flex-col gap-4 overflow-auto">
               <Input label="Name" name="name" />
               <Select name="genre" label="Genre" options={genreOptions} />
-              <div className="flex gap-4 w-full">
+              <div className="flex gap-4 w-full mb-2">
                 <Input label="Year" name="year" type="number" />
                 <Input label="Rating" name="rating" type="number" />
               </div>
+              <Upload label="Upload Movie Poster" />
             </div>
 
             <div className="flex justify-end gap-4 text-right absolute bottom-6 z-0 w-full left-0 right-0 px-6">

@@ -103,7 +103,7 @@ export const Select = (props: TProps) => {
 
             <div className="lg:hidden fixed z-20 left-0 right-0 top-0 bottom-0">
               <div className="bg-neutral-900 opacity-70 fixed w-full h-full z-10" />
-              <ul className="absolute bottom-0 bg-neutral-700 z-20 rounded-t-2xl w-full px-2 py-4 flex flex-col max-h-[60%]">
+              <ul className="absolute bottom-0 bg-neutral-700 z-20 rounded-t-2xl w-full px-2 py-4 flex flex-col max-h-[70%] min-h-[40%]">
                 <div className="flex items-start justify-between px-2">
                   <h3 className="text-neutral-0 text-xl font-semibold mb-3">
                     Select {label}
