@@ -31,7 +31,7 @@ export const Upload = (props: TProps) => {
 
   return (
     <div>
-      <div className="border border-dashed border-yellow-400 h-12 flex gap-2 items-center rounded-xl p-4 relative">
+      <div className="border border-dashed border-yellow-400 h-12 flex gap-2 items-center rounded-xl p-4 relative transition hover:brightness-75 active:brightness-50">
         <FaUpload className="text-yellow-400 text-lg" />
         <label className="font-medium text-sm">{label}</label>
         <input
