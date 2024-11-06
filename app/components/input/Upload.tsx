@@ -50,7 +50,9 @@ export const Upload = (props: TProps) => {
             alt={file.name}
             className="rounded-lg object-cover h-9 w-9"
           />
-          <div className="text-ellipsis whitespace-nowrap">{file.name}</div>
+          <div className="text-ellipsis whitespace-nowrap overflow-hidden">
+            {file.name}
+          </div>
         </div>
       ) : null}
     </div>
