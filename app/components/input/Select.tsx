@@ -78,7 +78,7 @@ export const Select = (props: TProps) => {
 
         {showOptions && (
           <>
-            <ul className="hidden lg:flex absolute bg-neutral-100 border border-neutral-50 rounded-xl w-full mt-2 py-1.5 px-2 flex-col">
+            <ul className="hidden lg:flex absolute z-10 bg-neutral-100 border border-neutral-50 rounded-xl w-full mt-2 py-1.5 px-2 flex-col">
               {options?.map((option) => {
                 const optionValue =
                   typeof option === 'string' ? option : option.value;

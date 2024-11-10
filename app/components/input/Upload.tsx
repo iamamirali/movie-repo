@@ -26,6 +26,8 @@ export const Upload = (props: TProps) => {
     const { files } = e.target;
     if (files && files?.length !== 0) {
       setFile(files[0]);
+    } else {
+      setFile(null)
     }
   };
 

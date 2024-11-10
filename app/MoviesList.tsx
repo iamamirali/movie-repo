@@ -7,6 +7,8 @@ import { IoAddCircleOutline } from 'react-icons/io5';
 import { FiVideoOff } from 'react-icons/fi';
 import { TGetMoviesResponse } from '@/types/movie';
 import { useState } from 'react';
+import { createMovie } from './actions/createMovie';
+import { convertToBase64 } from '@/utils';
 
 type TProps = { movies: TGetMoviesResponse };
 
@@ -20,6 +22,15 @@ export const MoviesList = (props: TProps) => {
   const onAddModalClose = () => setShowAddModal(false);
 
   const onAddButtonClick = () => setShowAddModal(true);
+
+  const handleFormAction = async (formData: FormData) => {
+    const image = formData.get('image') as File;
+    if (image.name) {
+      const base64Image = await convertToBase64(image);
+      formData.set('image', base64Image);
+    }
+    createMovie(formData);
+  };
 
   return (
     <div className="flex flex-col flex-grow">
@@ -58,7 +69,10 @@ export const MoviesList = (props: TProps) => {
           onClose={onAddModalClose}
           className="lg:w-[60%] lg:min-w-[42rem] flex flex-col"
         >
-          <form className="flex flex-col overflow-auto pb-20">
+          <form
+            action={handleFormAction}
+            className="flex flex-col overflow-auto pb-20"
+          >
             <div className="flex flex-col gap-4 overflow-auto">
               <Input label="Name" name="name" />
               <Select name="genre" label="Genre" options={genreOptions} />
