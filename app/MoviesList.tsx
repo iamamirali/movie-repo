@@ -90,7 +90,7 @@ export const MoviesList = (props: TProps) => {
               <Select name="genre" label="Genre" options={genreOptions} />
               <div className="flex gap-4 w-full mb-2">
                 <Input label="Year" name="year" type="number" />
-                <Input label="Rating" name="rating" type="number" />
+                <Input label="Rating" name="rating" type="number" step="0.1" />
               </div>
               <Upload label="Upload Movie Poster" />
             </div>

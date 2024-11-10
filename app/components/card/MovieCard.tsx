@@ -6,16 +6,9 @@ import { IconButton } from '../button';
 import { FaStar } from 'react-icons/fa';
 import { useState } from 'react';
 import { GiFilmStrip } from 'react-icons/gi';
+import { TMovie } from '@/types/movie';
 
-type TProps = {
-  name: string;
-  year: number;
-  genre: string;
-  rating: number;
-  image: string;
-};
-
-export const MovieCard = (props: TProps) => {
+export const MovieCard = (props: TMovie) => {
   const { name, year, genre, rating, image } = props;
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -25,7 +18,7 @@ export const MovieCard = (props: TProps) => {
         <GiFilmStrip className="min-w-28 h-full bg-neutral-200 text-neutral-50" />
       )}
       <Image
-        src={image}
+        src={image ?? ''}
         alt={name}
         width={112}
         height={160}
