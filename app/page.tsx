@@ -11,8 +11,8 @@ export default async function Home() {
   const session = await auth();
   if (!session?.user) redirect('/login');
 
-  // const movies: TGetMoviesResponse = await prisma.movie?.findMany();
-  const movies: TGetMoviesResponse = [];
+  const movies: TGetMoviesResponse = await prisma.movie?.findMany();
+  // const movies: TGetMoviesResponse = [];
 
   return (
     <div className="flex flex-col w-full">
