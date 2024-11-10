@@ -3,7 +3,14 @@
 import cloudinary from '@/lib/cloudinary';
 import { prisma } from '@/lib/db';
 
-export const createMovie = async (formData: FormData) => {
+type TInitialState = {
+  message: string;
+};
+
+export const createMovie = async (
+  initialState: TInitialState,
+  formData: FormData
+) => {
   const imageFile = formData.get('image') as File | string;
 
   const uploadedImage =
@@ -28,4 +35,6 @@ export const createMovie = async (formData: FormData) => {
       rating,
     },
   });
+
+  return { message: 'success' };
 };

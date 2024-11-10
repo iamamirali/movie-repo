@@ -6,18 +6,30 @@ import { FaPlus } from 'react-icons/fa6';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import { FiVideoOff } from 'react-icons/fi';
 import { TGetMoviesResponse } from '@/types/movie';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createMovie } from './actions/createMovie';
 import { convertToBase64 } from '@/utils';
+import { useFormState } from 'react-dom';
 
 type TProps = { movies: TGetMoviesResponse };
 
 const genreOptions = ['action', 'drama', 'comedy', 'sci-fi'];
 
+const initialFormState = {
+  message: '',
+};
+
 export const MoviesList = (props: TProps) => {
   const { movies } = props;
 
-  const [showAddModal, setShowAddModal] = useState(true);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [formState, formAction] = useFormState(createMovie, initialFormState);
+
+  useEffect(() => {
+    if (formState.message === 'success') {
+      setShowAddModal(false);
+    }
+  }, [formState]);
 
   const onAddModalClose = () => setShowAddModal(false);
 
@@ -29,7 +41,7 @@ export const MoviesList = (props: TProps) => {
       const base64Image = await convertToBase64(image);
       formData.set('image', base64Image);
     }
-    createMovie(formData);
+    formAction(formData);
   };
 
   return (
