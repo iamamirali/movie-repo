@@ -2,6 +2,7 @@
 
 import cloudinary from '@/lib/cloudinary';
 import { prisma } from '@/lib/db';
+import { revalidateTag } from 'next/cache';
 
 type TInitialState = {
   message: string;
@@ -36,5 +37,6 @@ export const createMovie = async (
     },
   });
 
+  revalidateTag('movies');
   return { message: 'success' };
 };

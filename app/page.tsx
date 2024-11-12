@@ -6,13 +6,23 @@ import { Header } from './components';
 import { MoviesList } from './MoviesList';
 import { prisma } from '@/lib/db';
 import { TGetMoviesResponse } from '@/types/movie';
+import { unstable_cache } from 'next/cache';
+
+const getMovies = unstable_cache(
+  async () => await prisma.movie?.findMany(),
+  ['movies'],
+  {
+    revalidate: 3600,
+    tags: ['movies'],
+  }
+);
 
 export default async function Home() {
   const session = await auth();
   if (!session?.user) redirect('/login');
 
-  const movies: TGetMoviesResponse = await prisma.movie?.findMany();
   // const movies: TGetMoviesResponse = [];
+  const movies: TGetMoviesResponse = await getMovies();
 
   return (
     <div className="flex flex-col w-full">
