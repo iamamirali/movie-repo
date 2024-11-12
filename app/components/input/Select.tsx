@@ -26,10 +26,12 @@ type TProps = {
   options: TOption[];
   value?: string | number;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  multiSelect?: boolean;
 };
 
 export const Select = (props: TProps) => {
-  const { label, name, className, options, value, onChange } = props;
+  const { label, name, className, options, value, onChange, multiSelect } =
+    props;
 
   const [inputValue, setInputValue] = useState<string | null>(null);
   const [showOptions, setShowOptions] = useState(false);
@@ -41,16 +43,68 @@ export const Select = (props: TProps) => {
     isOutsideClicked && setShowOptions(false);
   }, [isOutsideClicked]);
 
+  const handleMultiSelectChange = (value: string) => {
+    if (inputRef.current) {
+      let inputCurrent = inputRef.current;
+      const selectedValues = inputCurrent.value
+        ? inputCurrent.value.split(',')
+        : [];
+      if (selectedValues.includes(value)) {
+        const newValue = selectedValues
+          ?.filter((item) => item !== value)
+          .join(',');
+        setInputValue(newValue);
+        inputCurrent.value = newValue;
+      } else {
+        selectedValues.push(value);
+        const newValue = selectedValues.join(',');
+        setInputValue(newValue);
+        inputCurrent.value = newValue;
+      }
+    }
+  };
+
+  const handleSingleSelectChange = (value: string) => {
+    if (inputRef.current) {
+      let inputCurrent = inputRef.current;
+      if (inputCurrent.value === value) {
+        setInputValue(null);
+        inputCurrent.value = '';
+      } else {
+        setInputValue(value);
+        inputCurrent.value = value;
+      }
+    }
+  };
+
   const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setInputValue(value);
-    if (inputRef.current) {
-      inputRef.current.value = value;
+    if (multiSelect) {
+      handleMultiSelectChange(value);
+    } else {
+      handleSingleSelectChange(value);
     }
   };
 
   const onSelectClick = () => {
     setShowOptions(!showOptions);
+  };
+
+  const handleCheckboxStatus = (optionValue: string | number) => {
+    if (multiSelect) {
+      console.log(
+        (String(value ?? '') || inputValue)
+          ?.split(',')
+          .includes(String(optionValue))
+      );
+      return (
+        (String(value ?? '') || inputValue)
+          ?.split(',')
+          .includes(String(optionValue)) ?? false
+      );
+    } else {
+      return (value ?? inputValue) === optionValue;
+    }
   };
 
   return (
@@ -62,16 +116,20 @@ export const Select = (props: TProps) => {
           onClick={onSelectClick}
           className={`text-base ${
             label ? 'mt-3' : ''
-          } w-full h-12 cursor-pointer flex items-center relative capitalize rounded-xl p-3 text-neutral-0 bg-neutral-400 focus:outline-none border border-neutral-400 transition hover:border-neutral-50 ${
-            showOptions ? 'focus:border-yellow-400' : ''
-          } placeholder:text-neutral-100 ${className ?? ''}`}
+          } w-full h-12 pr-9 cursor-pointer flex items-center relative capitalize rounded-xl p-3 text-neutral-0 bg-neutral-400 focus:outline-none border border-neutral-400 transition hover:border-neutral-50 ${
+            showOptions ? 'border-yellow-400' : ''
+          } focus:border-yellow-400 placeholder:text-neutral-100 ${
+            className ?? ''
+          }`}
         >
-          {value ?? inputValue ?? ''}
+          <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+            {value ?? inputValue ?? ''}
+          </span>
           <FaChevronDown className="absolute right-4 top-0 bottom-0 m-auto" />
           <input
             id={name}
             name={name}
-            className="opacity-0 pointer-events-none"
+            className="pointer-events-none invisible absolute"
             ref={inputRef}
           />
         </button>
@@ -92,7 +150,7 @@ export const Select = (props: TProps) => {
                     <Checkbox
                       label={optionLabel}
                       value={optionValue}
-                      checked={(value ?? inputValue) === optionValue}
+                      checked={handleCheckboxStatus(optionValue)}
                       className="w-full px-2 py-1.5"
                       onChange={onChange ?? onValueChange}
                     />
@@ -128,7 +186,7 @@ export const Select = (props: TProps) => {
                         <Checkbox
                           label={optionLabel}
                           value={optionValue}
-                          checked={(value ?? inputValue) === optionValue}
+                          checked={handleCheckboxStatus(optionValue)}
                           className="w-full px-2 py-1.5"
                           onChange={onChange ?? onValueChange}
                         />

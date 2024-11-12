@@ -13,7 +13,21 @@ import { useFormState } from 'react-dom';
 
 type TProps = { movies: TGetMoviesResponse };
 
-const genreOptions = ['action', 'drama', 'comedy', 'sci-fi'];
+const genreOptions = [
+  'action',
+  'drama',
+  'comedy',
+  'sci-fi',
+  'horror',
+  'mysterious',
+  'romance',
+  'documentary',
+  'animation',
+  'thriller',
+  'anime',
+  'biography',
+  'historical',
+];
 
 const initialFormState = {
   message: '',
@@ -68,11 +82,13 @@ export const MoviesList = (props: TProps) => {
         />
       </div>
 
-      <div className="py-6 grid grid-cols-[repeat(auto-fill,minmax(18rem,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(22rem,1fr))] gap-6 w-full justify-center">
+      <ul className="py-6 grid grid-cols-[repeat(auto-fill,minmax(18rem,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(22rem,1fr))] gap-6 w-full justify-center">
         {movies?.map(({ id, name, genre, rating, year, image }) => (
-          <MovieCard key={id} {...{ name, genre, rating, year, image }} />
+          <li key={id}>
+            <MovieCard {...{ name, genre, rating, year, image }} />
+          </li>
         ))}
-      </div>
+      </ul>
 
       {showAddModal && (
         <Modal
@@ -87,7 +103,12 @@ export const MoviesList = (props: TProps) => {
           >
             <div className="flex flex-col gap-4 overflow-auto">
               <Input label="Name" name="name" />
-              <Select name="genre" label="Genre" options={genreOptions} />
+              <Select
+                multiSelect
+                name="genre"
+                label="Genre"
+                options={genreOptions}
+              />
               <div className="flex gap-4 w-full mb-2">
                 <Input label="Year" name="year" type="number" />
                 <Input label="Rating" name="rating" type="number" step="0.1" />

@@ -27,13 +27,13 @@ export const Upload = (props: TProps) => {
     if (files && files?.length !== 0) {
       setFile(files[0]);
     } else {
-      setFile(null)
+      setFile(null);
     }
   };
 
   return (
     <div>
-      <div className="border border-dashed border-yellow-400 h-12 flex gap-2 items-center rounded-xl p-4 relative transition hover:brightness-75 active:brightness-50">
+      <div className="border border-dashed border-yellow-400 h-12 flex gap-2 items-center rounded-xl p-4 relative transition focus-within:brightness-75 hover:brightness-75 active:brightness-50">
         <FaUpload className="text-yellow-400 text-lg" />
         <label className="font-medium text-sm">{label}</label>
         <input
