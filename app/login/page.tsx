@@ -1,65 +1,94 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { signInUser } from "../actions/auth";
+import { getImageProps } from 'next/image';
+import Link from 'next/link';
+import { signInUser } from '../actions/auth';
+import { Button, Input } from '../components';
+
+const {
+  props: { srcSet: desktop },
+} = getImageProps({
+  width: 1069,
+  height: 691,
+  src: '/asset/images/login/tape-desktop.jpg',
+  alt: 'tape',
+});
+
+const {
+  props: { srcSet: tabl },
+} = getImageProps({
+  width: 738,
+  height: 356,
+  src: '/asset/images/login/tape-tablet.jpg',
+  alt: 'tape',
+});
+
+const {
+  props: { srcSet: mobile, ...rest },
+} = getImageProps({
+  width: 400,
+  height: 150,
+  placeholder: 'blur',
+  blurDataURL: '/asset/images/login/tape-placeholder.jpg',
+  src: '/asset/images/login/tape-mobile.jpg',
+  alt: 'tape',
+});
 
 export default function Login(): JSX.Element {
   return (
-    <div className="w-full p-6 flex flex-col justify-center">
-      <Image
-        src="/asset/images/login/tape-small.svg"
-        alt="tape"
-        width={0}
-        height={0}
-        className="rounded-xl w-full h-32 object-cover"
-      />
-      <form className="flex flex-col gap-8 py-8" action={signInUser}>
-        <div className="w-full">
-          <h1 className="text-xl font-bold">Welcome to Movie Repo</h1>
-          <h2 className="text-sm mt-4 font-medium text-neutral-50">
-            Enter your details in order to sign in
-          </h2>
-        </div>
-        <div>
-          <label htmlFor="username" className="text-sm">
-            Username
-            <br />
-            <input
+    <div className="w-full p-6 flex flex-col justify-center lg:flex-row-reverse lg:justify-between lg:h-full">
+      <picture className="lg:w-2/5">
+        <source media="(min-width: 1024px)" srcSet={desktop} />
+        <source media="(min-width: 640px)" srcSet={tabl} />
+        <source media="(max-width: 639px)" srcSet={mobile} />
+        <img
+          alt="tape"
+          {...rest}
+          className="rounded-xl w-full sm:rounded-2xl sm:h-80 sm:object-cover lg:h-full lg:min-h-[600px]"
+        />
+      </picture>
+
+      <div className="lg:w-3/5 lg:flex lg:items-center lg:justify-center lg:flex-col">
+        <form
+          className="flex flex-col gap-8 py-8 lg:w-2/3 xl:w-1/2"
+          action={signInUser}
+        >
+          <div className="w-full">
+            <h1 className="text-xl font-bold sm:text-2xl">
+              Welcome to Movie Repo
+            </h1>
+            <h2 className="text-sm mt-4 font-medium text-neutral-50 sm:text-base">
+              Enter your details in order to sign in
+            </h2>
+          </div>
+          <div>
+            <Input
+              label="Username"
               name="username"
-              id="username"
-              type="text"
-              placeholder="test"
-              className="text-base mt-3 mb-6 w-full h-12 rounded-xl p-3 text-neutral-0 bg-neutral-400 focus:outline-none border-solid border border-neutral-400 transition hover:border-neutral-50 focus:border-yellow-400 placeholder:text-neutral-100"
+              className="mb-6"
+              labelClassName="sm:!text-base"
             />
-          </label>
-          <label htmlFor="password" className="text-sm">
-            Password
-            <br />
-            <input
+            <Input
+              label="Password"
               name="password"
-              id="password"
-              type="password"
-              placeholder="test"
-              className="text-base mt-3 w-full h-12 rounded-xl p-3 text-neutral-0 bg-neutral-400 focus:outline-none border-solid border border-neutral-400 transition hover:border-neutral-50 focus:border-yellow-400 placeholder:text-neutral-100"
+              labelClassName="sm:!text-base"
             />
-          </label>
+          </div>
+          <Button
+            title="Sign In"
+            type="submit"
+            className="rounded-xl !h-12 !p-3 !text-base text-neutral-900 w-full bg-yellow-400 hover:bg-yellow-200 active:bg-yellow-50"
+          />
+        </form>
+        <div className="text-sm lg:w-2/3 xl:w-1/2 sm:text-base sm:font-medium">
+          Don`t have an account?{' '}
+          <Link
+            href="/"
+            className="text-yellow-400 transition hover:text-yellow-200 active:text-yellow-50"
+          >
+            Sign Up
+          </Link>
         </div>
-        <button
-          type="submit"
-          className="rounded-xl h-12 p-3 text-base text-neutral-900 font-semibold w-full bg-yellow-400 transition hover:bg-yellow-200 active:bg-yellow-50"
-        >
-          Sign In
-        </button>
-      </form>
-      <div className="text-sm">
-        Don`t have an account?{" "}
-        <Link
-          href="/"
-          className="text-yellow-400 transition hover:text-yellow-200 active:text-yellow-50"
-        >
-          Sign Up
-        </Link>
       </div>
     </div>
   );
