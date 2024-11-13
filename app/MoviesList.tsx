@@ -27,6 +27,7 @@ const genreOptions = [
   'anime',
   'biography',
   'historical',
+  'series',
 ];
 
 const initialFormState = {

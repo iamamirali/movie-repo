@@ -15,6 +15,15 @@ const {
 });
 
 const {
+  props: { srcSet: tabl },
+} = getImageProps({
+  width: 738,
+  height: 356,
+  src: '/asset/images/login/tape-tablet.jpg',
+  alt: 'tape',
+});
+
+const {
   props: { srcSet: mobile, ...rest },
 } = getImageProps({
   width: 400,
@@ -30,11 +39,12 @@ export default function Login(): JSX.Element {
     <div className="w-full p-6 flex flex-col justify-center lg:flex-row-reverse lg:justify-between lg:h-full">
       <picture className="lg:w-2/5">
         <source media="(min-width: 1024px)" srcSet={desktop} />
+        <source media="(min-width: 640px)" srcSet={tabl} />
         <source media="(max-width: 639px)" srcSet={mobile} />
         <img
           alt="tape"
           {...rest}
-          className="rounded-xl w-full lg:rounded-2xl lg:object-cover lg:h-full lg:min-h-[600px]"
+          className="rounded-xl w-full sm:rounded-2xl sm:h-80 sm:object-cover lg:h-full lg:min-h-[600px]"
         />
       </picture>
 
@@ -44,10 +54,10 @@ export default function Login(): JSX.Element {
           action={signInUser}
         >
           <div className="w-full">
-            <h1 className="text-xl font-bold lg:text-3xl">
+            <h1 className="text-xl font-bold sm:text-2xl">
               Welcome to Movie Repo
             </h1>
-            <h2 className="text-sm mt-4 font-medium text-neutral-50 lg:text-lg">
+            <h2 className="text-sm mt-4 font-medium text-neutral-50 sm:text-base">
               Enter your details in order to sign in
             </h2>
           </div>
@@ -56,12 +66,12 @@ export default function Login(): JSX.Element {
               label="Username"
               name="username"
               className="mb-6"
-              labelClassName="lg:!text-base"
+              labelClassName="sm:!text-base"
             />
             <Input
               label="Password"
               name="password"
-              labelClassName="lg:!text-base"
+              labelClassName="sm:!text-base"
             />
           </div>
           <Button
@@ -70,7 +80,7 @@ export default function Login(): JSX.Element {
             className="rounded-xl !h-12 !p-3 !text-base text-neutral-900 w-full bg-yellow-400 hover:bg-yellow-200 active:bg-yellow-50"
           />
         </form>
-        <div className="text-sm lg:w-2/3 xl:w-1/2 lg:text-base lg:font-medium">
+        <div className="text-sm lg:w-2/3 xl:w-1/2 sm:text-base sm:font-medium">
           Don`t have an account?{' '}
           <Link
             href="/"
