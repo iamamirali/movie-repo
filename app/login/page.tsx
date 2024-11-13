@@ -39,16 +39,30 @@ export default function Login(): JSX.Element {
       </picture>
 
       <div className="lg:w-3/5 lg:flex lg:items-center lg:justify-center lg:flex-col">
-        <form className="flex flex-col gap-8 py-8 lg:w-1/2" action={signInUser}>
+        <form
+          className="flex flex-col gap-8 py-8 lg:w-2/3 xl:w-1/2"
+          action={signInUser}
+        >
           <div className="w-full">
-            <h1 className="text-xl font-bold">Welcome to Movie Repo</h1>
-            <h2 className="text-sm mt-4 font-medium text-neutral-50">
+            <h1 className="text-xl font-bold lg:text-3xl">
+              Welcome to Movie Repo
+            </h1>
+            <h2 className="text-sm mt-4 font-medium text-neutral-50 lg:text-lg">
               Enter your details in order to sign in
             </h2>
           </div>
           <div>
-            <Input label="Username" name="username" className="mb-6" />
-            <Input label="Password" name="password" />
+            <Input
+              label="Username"
+              name="username"
+              className="mb-6"
+              labelClassName="lg:!text-base"
+            />
+            <Input
+              label="Password"
+              name="password"
+              labelClassName="lg:!text-base"
+            />
           </div>
           <Button
             title="Sign In"
@@ -56,7 +70,7 @@ export default function Login(): JSX.Element {
             className="rounded-xl !h-12 !p-3 !text-base text-neutral-900 w-full bg-yellow-400 hover:bg-yellow-200 active:bg-yellow-50"
           />
         </form>
-        <div className="text-sm lg:w-1/2">
+        <div className="text-sm lg:w-2/3 xl:w-1/2 lg:text-base lg:font-medium">
           Don`t have an account?{' '}
           <Link
             href="/"

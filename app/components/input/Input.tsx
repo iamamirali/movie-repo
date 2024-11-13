@@ -2,13 +2,14 @@ import { InputHTMLAttributes } from 'react';
 
 type TProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
+  labelClassName?: string;
 };
 
 export const Input = (props: TProps) => {
-  const { label, name, id, type, className, ...rest } = props;
+  const { label, name, id, type, className, labelClassName, ...rest } = props;
 
   return (
-    <label htmlFor={name} className="text-sm w-full">
+    <label htmlFor={name} className={`text-sm w-full ${labelClassName ?? ''}`}>
       {label && (
         <>
           {label}
