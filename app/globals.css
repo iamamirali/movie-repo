@@ -46,7 +46,7 @@ body {
 } */
 
 ::-webkit-scrollbar {
-  width: 1.5rem;
+  width: 1.4rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -58,19 +58,19 @@ body {
 }
 
 ::-webkit-scrollbar-track:hover {
-  background-color: #adb5bd;
+  background-color: #737576;
 }
 
 ::-webkit-scrollbar-thumb {
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   background-clip: padding-box;
-  background-color: #495057;
+  background-color: #505458;
   border-radius: 0.7rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #6c757d;
+  background-color: #41464b;
 }
 
 .ellipsis-2 {

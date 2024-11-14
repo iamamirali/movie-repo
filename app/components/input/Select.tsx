@@ -9,8 +9,8 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useOutsideClick } from '@/app/hooks/useOutsideClick';
 import { IconButton } from '../button';
+import { useOutsideClick } from '@/app/hooks';
 
 type TOption =
   | {

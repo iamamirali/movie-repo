@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { createMovie } from './actions/createMovie';
 import { convertToBase64 } from '@/utils';
 import { useFormState } from 'react-dom';
+import { useModalState } from './hooks';
 
 type TProps = { movies: TGetMoviesResponse };
 
@@ -37,14 +38,14 @@ const initialFormState = {
 export const MoviesList = (props: TProps) => {
   const { movies } = props;
 
-  const [showAddModal, setShowAddModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useModalState(false);
   const [formState, formAction] = useFormState(createMovie, initialFormState);
 
   useEffect(() => {
     if (formState.message === 'success') {
       setShowAddModal(false);
     }
-  }, [formState]);
+  }, [formState, setShowAddModal]);
 
   const onAddModalClose = () => setShowAddModal(false);
 
