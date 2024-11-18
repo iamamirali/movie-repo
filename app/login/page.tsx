@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { signInUser } from '../actions/auth';
+import { logInUser } from '../actions/auth';
 import { Button, Input } from '../components';
 import { AuthPageImage } from '../components/layout';
 
@@ -14,14 +14,14 @@ export default function Login(): JSX.Element {
         <div className="lg:min-h-[600px] lg:w-3/5 lg:flex lg:items-center lg:justify-center lg:flex-col">
           <form
             className="flex flex-col gap-6 py-6 sm:gap-8 sm:py-8 lg:w-2/3 xl:w-1/2"
-            action={signInUser}
+            action={logInUser}
           >
             <div className="w-full">
               <h1 className="text-xl font-bold sm:text-2xl">
                 Welcome to Movie Repo
               </h1>
               <h2 className="text-sm mt-2 font-medium text-neutral-50 sm:mt-3 sm:text-base">
-                Enter your details in order to sign in
+                Enter your details in order to log in
               </h2>
             </div>
             <div>
@@ -38,7 +38,7 @@ export default function Login(): JSX.Element {
               />
             </div>
             <Button
-              title="Sign In"
+              title="Log In"
               type="submit"
               className="rounded-xl !h-12 !p-3 !text-base text-neutral-900 w-full bg-yellow-400 hover:bg-yellow-200 active:bg-yellow-50"
             />
