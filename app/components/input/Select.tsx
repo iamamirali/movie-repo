@@ -92,11 +92,6 @@ export const Select = (props: TProps) => {
 
   const handleCheckboxStatus = (optionValue: string | number) => {
     if (multiSelect) {
-      console.log(
-        (String(value ?? '') || inputValue)
-          ?.split(',')
-          .includes(String(optionValue))
-      );
       return (
         (String(value ?? '') || inputValue)
           ?.split(',')
