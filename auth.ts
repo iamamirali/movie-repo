@@ -1,18 +1,18 @@
-import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import { findUser } from "./app/api/auth/findUser";
+import NextAuth from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import { findUser } from './app/api/auth/findUser';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
-    signIn: "/login",
+    signIn: '/login',
   },
   providers: [
     Credentials({
       // You can specify which fields should be submitted, by adding keys to the `credentials` object.
       // e.g. domain, username, password, 2FA token, etc.
       credentials: {
-        username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" },
+        username: { label: 'Username', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
       authorize: async (credentials) => {
         let user = null;
@@ -20,11 +20,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         user = await findUser(credentials);
         if (!user) {
           // No user found, so this is their first attempt to login
-          throw new Error("User not found.");
+          throw new Error('User not found.');
         }
         // return user object with their profile data
         return user;
       },
     }),
   ],
+  callbacks: {
+    async session({ session, token }) {
+      session.user.id = token.sub ?? '';
+      return session;
+    },
+  },
 });

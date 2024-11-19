@@ -6,7 +6,7 @@ import { FaPlus } from 'react-icons/fa6';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import { FiVideoOff } from 'react-icons/fi';
 import { TGetMoviesResponse } from '@/types/movie';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { createMovie } from './actions/createMovie';
 import { convertToBase64 } from '@/utils';
 import { useFormState } from 'react-dom';
