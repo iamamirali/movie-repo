@@ -17,15 +17,17 @@ export const MovieCard = (props: TMovie) => {
       {!imageLoaded && (
         <GiFilmStrip className="min-w-28 h-full bg-neutral-200 text-neutral-50" />
       )}
-      <Image
-        src={image ?? ''}
-        alt={name}
-        width={112}
-        height={160}
-        onLoad={() => setImageLoaded(true)}
-        onError={() => setImageLoaded(false)}
-        className={`${imageLoaded ? 'visible' : 'invisible absolute'}`}
-      />
+      {typeof image === 'string' && (
+        <Image
+          src={image}
+          alt={name}
+          width={112}
+          height={160}
+          onLoad={() => setImageLoaded(true)}
+          onError={() => setImageLoaded(false)}
+          className={`${imageLoaded ? 'visible' : 'invisible absolute'}`}
+        />
+      )}
       <div className="p-2.5 h-full w-full flex flex-col justify-center gap-2.5">
         <div className="flex justify-between items-center h-12">
           <h3 className="text-lg font-bold ellipsis-2">{name}</h3>
