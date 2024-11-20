@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Button, Input } from '../components';
 import { AuthPageImage } from '../components/layout';
+import { signUpUser } from '../actions';
 
 export default function SignUp() {
   return (
@@ -11,7 +12,10 @@ export default function SignUp() {
         <AuthPageImage authType="signUp" />
 
         <div className="lg:min-h-[600px] lg:w-3/5 lg:flex lg:items-center lg:justify-center lg:flex-col">
-          <form className="flex flex-col gap-6 py-6 sm:gap-8 sm:py-8 lg:w-2/3 xl:w-1/2">
+          <form
+            action={signUpUser}
+            className="flex flex-col gap-6 py-6 sm:gap-8 sm:py-8 lg:w-2/3 xl:w-1/2"
+          >
             <div className="w-full">
               <h1 className="text-xl font-bold sm:text-2xl">
                 Create a Movie Repo Account
@@ -39,6 +43,7 @@ export default function SignUp() {
                 name="password"
                 labelClassName="sm:!text-base"
                 placeholder="At least 8 characters"
+                type="password"
               />
             </div>
             <Button

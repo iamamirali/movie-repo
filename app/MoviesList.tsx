@@ -7,7 +7,7 @@ import { IoAddCircleOutline } from 'react-icons/io5';
 import { FiVideoOff } from 'react-icons/fi';
 import { TGetMoviesResponse } from '@/types/movie';
 import { useEffect } from 'react';
-import { createMovie } from './actions/createMovie';
+import { createMovie } from './actions';
 import { convertToBase64 } from '@/utils';
 import { useFormState } from 'react-dom';
 import { useModalState } from './hooks';

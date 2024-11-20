@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { logInUser } from '../actions/auth';
+import { logInUser } from '../actions/login';
 import { Button, Input } from '../components';
 import { AuthPageImage } from '../components/layout';
 
@@ -34,6 +34,7 @@ export default function Login(): JSX.Element {
               <Input
                 label="Password"
                 name="password"
+                type="password"
                 labelClassName="sm:!text-base"
               />
             </div>
