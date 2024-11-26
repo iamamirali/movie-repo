@@ -84,13 +84,15 @@ export const MoviesList = (props: TProps) => {
         />
       </div>
 
-      <ul className="py-6 grid grid-cols-[repeat(auto-fill,minmax(18rem,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(22rem,1fr))] gap-6 w-full justify-center">
-        {movies?.map(({ id, name, genre, rating, year, image }) => (
-          <li key={id}>
-            <MovieCard {...{ name, genre, rating, year, image }} />
-          </li>
-        ))}
-      </ul>
+      {movies.length > 0 && (
+        <ul className="py-6 grid grid-cols-[repeat(auto-fill,minmax(18rem,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(22rem,1fr))] gap-6 w-full justify-center">
+          {movies?.map(({ id, name, genre, rating, year, image }) => (
+            <li key={id}>
+              <MovieCard {...{ name, genre, rating, year, image }} />
+            </li>
+          ))}
+        </ul>
+      )}
 
       {showAddModal && (
         <Modal
@@ -135,14 +137,21 @@ export const MoviesList = (props: TProps) => {
         </Modal>
       )}
 
-      {/* <div className="py-6 flex items-center flex-grow">
-        <button className="w-full h-1/2 flex flex-col items-center justify-center border border-dashed rounded-xl transition-all hover:brightness-[.85] active:brightness-75 border-neutral-50">
-          <p className="mb-4 text-2xl font-bold text-neutral-50">
-            Add your first movie
-          </p>
-          <IoAddCircleOutline className="text-6xl text-neutral-50" />
-        </button>
+      {movies.length <= 0 && (
+        <div className="py-6 flex items-center flex-grow">
+          <button
+            onClick={onAddButtonClick}
+            className="w-full h-1/2 min-h-40 flex flex-col items-center justify-center border border-dashed rounded-xl transition-all hover:brightness-[.85] active:brightness-75 border-neutral-50"
+          >
+            <p className="mb-4 text-2xl font-bold text-neutral-50">
+              Add your first movie
+            </p>
+            <IoAddCircleOutline className="text-6xl text-neutral-50" />
+          </button>
+        </div>
+      )}
 
+      {/* <div className="py-6 flex items-center flex-grow">
         <div className="w-full h-1/2 flex flex-col items-center justify-center border rounded-xl border-neutral-50">
           <p className="mb-4 text-2xl font-bold text-neutral-50">
             No movies found
