@@ -2,7 +2,8 @@
 
 import { prisma } from '@/lib/db';
 import { TUser } from '@/types/user';
-import { signIn } from '@/auth';
+import { signIn } from '@/lib/auth';
+import { hashPassword } from '@/utils';
 
 export const signUpUser = async (formData: FormData) => {
   const name = (formData.get('name') as string) ?? 'User';
@@ -13,7 +14,7 @@ export const signUpUser = async (formData: FormData) => {
     data: {
       name,
       username,
-      password,
+      password: await hashPassword(password),
     },
   });
   if (user) {

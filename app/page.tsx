@@ -1,6 +1,6 @@
 // import Image from "next/image";
 // import Link from "next/link";
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { Header } from './components';
 import { MoviesList } from './MoviesList';
