@@ -1,10 +1,11 @@
 'use server';
 
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
 import cloudinary from '@/lib/cloudinary';
 import { prisma } from '@/lib/db';
 import { revalidateTag } from 'next/cache';
 
+// init state
 type TInitialState = {
   message: string;
 };
