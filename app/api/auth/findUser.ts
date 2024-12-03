@@ -1,22 +1,26 @@
-import { prisma } from "@/lib/db";
+import bcrypt from 'bcryptjs';
+import { prisma } from '@/lib/db';
 
 export async function findUser(
-  credentials?: Partial<Record<"username" | "password", unknown>>
+  credentials?: Partial<Record<'username' | 'password', unknown>>
 ) {
-  const user = await prisma.user.findFirst({
+  const user = await prisma.user.findUnique({
     where: {
       username: credentials?.username as string,
-      password: credentials?.password as string,
     },
   });
-  return user;
-}
 
-findUser()
-  .catch(async (e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+  if (!user) {
+    return null;
+  }
+
+  const isMatch = await bcrypt.compare(
+    credentials?.password as string,
+    user.password
+  );
+  if (isMatch) {
+    return user;
+  } else {
+    return null;
+  }
+}
