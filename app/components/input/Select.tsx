@@ -37,7 +37,7 @@ export const Select = (props: TProps) => {
   const [showOptions, setShowOptions] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const selectBoxRef = useRef(null);
-  const isOutsideClicked = useOutsideClick(selectBoxRef);
+  const isOutsideClicked = useOutsideClick([selectBoxRef]);
 
   useEffect(() => {
     isOutsideClicked && setShowOptions(false);

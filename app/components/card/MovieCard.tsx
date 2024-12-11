@@ -1,16 +1,39 @@
 'use client';
 
 import Image from 'next/image';
-import { IoMdMore } from 'react-icons/io';
-import { IconButton } from '../button';
-import { FaStar } from 'react-icons/fa';
-import { useState } from 'react';
+import { FaRegEdit, FaStar } from 'react-icons/fa';
+import { MouseEventHandler, useState } from 'react';
 import { GiFilmStrip } from 'react-icons/gi';
 import { TMovie } from '@/types/movie';
+import { Dropdown } from '../dropdown';
+import { IconType } from 'react-icons';
+import { FaRegTrashCan } from 'react-icons/fa6';
+
+type TMovieAction = {
+  title: string;
+  icon?: IconType;
+  onClick: MouseEventHandler<HTMLButtonElement>;
+  className?: string;
+};
 
 export const MovieCard = (props: TMovie) => {
   const { name, year, genre, rating, image } = props;
   const [imageLoaded, setImageLoaded] = useState(false);
+
+  const movieActions: TMovieAction[] = [
+    {
+      title: 'Edit',
+      icon: FaRegEdit,
+      onClick: () => null,
+      className: '!text-neutral-0 lg:!text-neutral-900',
+    },
+    {
+      title: 'Delete',
+      icon: FaRegTrashCan,
+      onClick: () => null,
+      className: 'text-red-400 lg:text-red-600',
+    },
+  ];
 
   return (
     <article className="h-40 rounded-xl bg-neutral-400 flex items-center justify-between overflow-hidden">
@@ -31,7 +54,7 @@ export const MovieCard = (props: TMovie) => {
       <div className="p-2.5 h-full w-full flex flex-col justify-center gap-2.5">
         <div className="flex justify-between items-center h-12">
           <h3 className="text-lg font-bold ellipsis-2">{name}</h3>
-          <IconButton Icon={IoMdMore} />
+          <Dropdown items={movieActions} label={name} />
         </div>
         <div className="text-sm font-medium text-neutral-50">{year}</div>
         <div className="text-sm font-medium text-neutral-50 capitalize">
