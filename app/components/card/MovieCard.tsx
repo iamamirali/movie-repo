@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { FaRegEdit, FaStar } from 'react-icons/fa';
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 import { GiFilmStrip } from 'react-icons/gi';
 import { TMovie } from '@/types/movie';
 import { Dropdown } from '../dropdown';
@@ -10,6 +10,9 @@ import { IconType } from 'react-icons';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { Modal } from '../modal';
 import { Button } from '../button';
+import { useFormState } from 'react-dom';
+import { deleteMovie, TDeleteMoviePayload } from '@/app/actions/deleteMovie';
+// import { convertImageUrlToPublicId } from '@/utils';
 
 type TMovieAction = {
   title: string;
@@ -18,10 +21,18 @@ type TMovieAction = {
   className?: string;
 };
 
+const initialFormState = {
+  message: '',
+};
+
 export const MovieCard = (props: TMovie) => {
-  const { name, year, genre, rating, image } = props;
+  const { name, year, genre, rating, image, id } = props;
   const [imageLoaded, setImageLoaded] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteMovieFormState, deleteMovieFormAction] = useFormState(
+    deleteMovie,
+    initialFormState
+  );
 
   const movieActions: TMovieAction[] = [
     {
@@ -38,7 +49,22 @@ export const MovieCard = (props: TMovie) => {
     },
   ];
 
+  useEffect(() => {
+    if (deleteMovieFormState.message === 'success') {
+      setShowDeleteModal(false);
+    }
+  }, [deleteMovieFormState, setShowDeleteModal]);
+
   const onDeleteModalClose = () => setShowDeleteModal(false);
+
+  const handleDeleteMovie = () => {
+    const payload: TDeleteMoviePayload = {
+      movieId: String(id),
+      // imagePublicId: convertImageUrlToPublicId(image ?? ''),
+      imagePublicId: null,
+    };
+    deleteMovieFormAction(payload);
+  };
 
   return (
     <>
@@ -90,6 +116,7 @@ export const MovieCard = (props: TMovie) => {
               title="Delete"
               type="submit"
               className="border border-red-400 !h-12 text-red-400 !w-3/5  !text-base !rounded-xl"
+              onClick={handleDeleteMovie}
             />
           </div>
         </Modal>
