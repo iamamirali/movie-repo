@@ -12,7 +12,7 @@ import { Modal } from '../modal';
 import { Button } from '../button';
 import { useFormState } from 'react-dom';
 import { deleteMovie, TDeleteMoviePayload } from '@/app/actions/deleteMovie';
-// import { convertImageUrlToPublicId } from '@/utils';
+import { convertImageUrlToPublicId } from '@/utils';
 
 type TMovieAction = {
   title: string;
@@ -60,8 +60,7 @@ export const MovieCard = (props: TMovie) => {
   const handleDeleteMovie = () => {
     const payload: TDeleteMoviePayload = {
       movieId: String(id),
-      // imagePublicId: convertImageUrlToPublicId(image ?? ''),
-      imagePublicId: null,
+      imagePublicId: convertImageUrlToPublicId(image ?? ''),
     };
     deleteMovieFormAction(payload);
   };

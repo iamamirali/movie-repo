@@ -50,7 +50,7 @@ export const Upload = (props: TProps) => {
             width={36}
             height={36}
             alt={file.name}
-            className="rounded-lg object-cover h-9 w-9"
+            className="rounded-lg object-cover h-9 w-9 shrink-0"
           />
           <div className="text-ellipsis whitespace-nowrap overflow-hidden">
             {file.name}
