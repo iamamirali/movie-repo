@@ -11,7 +11,7 @@ type TInitialState = {
 };
 
 export const createMovie = async (
-  initialState: TInitialState,
+  _initialState: TInitialState,
   formData: FormData
 ) => {
   const imageFile = formData.get('image') as File | string;
