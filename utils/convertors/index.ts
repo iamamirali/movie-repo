@@ -1,0 +1,1 @@
+export { convertImageUrlToPublicId } from './convertImageUrlToPublicId';

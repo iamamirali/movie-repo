@@ -69,9 +69,9 @@ export const MoviesList = (props: TProps) => {
 
       {movies.length > 0 && (
         <ul className="py-6 grid grid-cols-[repeat(auto-fill,minmax(18rem,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(22rem,1fr))] gap-6 w-full justify-center">
-          {movies?.map(({ id, name, genre, rating, year, image }) => (
-            <li key={id}>
-              <MovieCard {...{ name, genre, rating, year, image }} />
+          {movies?.map((props) => (
+            <li key={props.id}>
+              <MovieCard {...props} />
             </li>
           ))}
         </ul>
