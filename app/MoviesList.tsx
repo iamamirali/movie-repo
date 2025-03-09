@@ -4,32 +4,15 @@ import { FaFilter, FaSort } from 'react-icons/fa';
 import { Button, Input, Modal, MovieCard, Select, Upload } from './components';
 import { FaPlus } from 'react-icons/fa6';
 import { IoAddCircleOutline } from 'react-icons/io5';
-import { FiVideoOff } from 'react-icons/fi';
 import { TGetMoviesResponse } from '@/types/movie';
 import { useEffect } from 'react';
 import { createMovie } from './actions';
 import { convertToBase64 } from '@/utils';
 import { useFormState } from 'react-dom';
 import { useModalState } from './hooks';
+import { genreOptions } from '@/lib/constants';
 
 type TProps = { movies: TGetMoviesResponse };
-
-const genreOptions = [
-  'action',
-  'drama',
-  'comedy',
-  'sci-fi',
-  'horror',
-  'mysterious',
-  'romance',
-  'documentary',
-  'animation',
-  'thriller',
-  'anime',
-  'biography',
-  'historical',
-  'series',
-];
 
 const initialFormState = {
   message: '',

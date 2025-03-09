@@ -1,0 +1,16 @@
+export const genreOptions = [
+  'action',
+  'drama',
+  'comedy',
+  'sci-fi',
+  'horror',
+  'mysterious',
+  'romance',
+  'documentary',
+  'animation',
+  'thriller',
+  'anime',
+  'biography',
+  'historical',
+  'series',
+];
