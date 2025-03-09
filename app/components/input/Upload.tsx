@@ -7,10 +7,11 @@ import { FaUpload } from 'react-icons/fa';
 type TProps = {
   label: string;
   name?: string;
+  defaultSrc?: string;
 };
 
 export const Upload = (props: TProps) => {
-  const { label, name } = props;
+  const { label, name, defaultSrc } = props;
 
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -43,18 +44,30 @@ export const Upload = (props: TProps) => {
           onChange={onChange}
         />
       </div>
-      {preview && file ? (
+      {(preview && file) || defaultSrc ? (
         <div className="flex gap-2 border border-neutral-400 rounded-xl px-2 mt-2 h-12 items-center text-sm text-neutral-50 overflow-hidden">
-          <Image
-            src={preview}
-            width={36}
-            height={36}
-            alt={file.name}
-            className="rounded-lg object-cover h-9 w-9"
-          />
-          <div className="text-ellipsis whitespace-nowrap overflow-hidden">
-            {file.name}
-          </div>
+          {preview && file ? (
+            <>
+              <Image
+                src={preview}
+                width={36}
+                height={36}
+                alt={file?.name}
+                className="rounded-lg object-cover h-9 w-9"
+              />
+              <div className="text-ellipsis whitespace-nowrap overflow-hidden">
+                {file?.name}
+              </div>
+            </>
+          ) : (
+            <Image
+              src={defaultSrc ?? ''}
+              width={36}
+              height={36}
+              alt="movie cover"
+              className="rounded-lg object-cover h-9 w-9"
+            />
+          )}
         </div>
       ) : null}
     </div>
